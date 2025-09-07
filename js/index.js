@@ -45,7 +45,7 @@ class VideoTransition {
     const loadingText = document.createElement("div");
     loadingText.className = "loadingText";
     loadingText.style.cssText = ``;
-    loadingText.textContent = "正在加载图片...";
+    loadingText.textContent = "正在加载...";
     this.dom.appendChild(loadingText);
   }
   hiddenLoad() {
@@ -77,16 +77,10 @@ function preloadImages(imgSrcArr) {
       img.onload = () => {
         loadedCount++;
         loadedImages[index] = img;
-        console.log(
-          `已加载: ${loadedCount}/${totalImages} (${Math.round(
-            (loadedCount / totalImages) * 100
-          )}%) - ${src}`
-        );
 
         if (loadedCount === totalImages) {
-          console.log("所有图片预加载完成!");
           if (loadErrors.length > 0) {
-            console.warn("部分图片加载失败:", loadErrors);
+            console.warn("部分加载失败:", loadErrors);
           }
           resolve(loadedImages);
         }
@@ -98,9 +92,8 @@ function preloadImages(imgSrcArr) {
         console.error(`图片加载失败: ${src}`);
 
         if (loadedCount === totalImages) {
-          console.log("所有图片处理完成!");
           if (loadErrors.length > 0) {
-            console.warn("部分图片加载失败:", loadErrors);
+            console.warn("部分加载失败:", loadErrors);
           }
           resolve(loadedImages);
         }
